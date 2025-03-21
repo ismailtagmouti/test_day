@@ -9,6 +9,7 @@ export function NoteList({
   editingNote,
   noteTitle,
   noteContent,
+  onSortNote,
   onAddNote,
   onEditNote,
   onDeleteNote,
@@ -31,6 +32,12 @@ export function NoteList({
             >
               <Plus className="h-5 w-5" />
               New Note
+            </button>
+            <button
+              onClick={onSortNote}
+              className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2"
+            >
+              Sort
             </button>
           </div>
 

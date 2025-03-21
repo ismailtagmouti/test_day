@@ -10,6 +10,7 @@ import com.keiken.test.service.NoteService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/notebooks")
 public class NotebookController {

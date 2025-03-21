@@ -8,6 +8,7 @@ import com.keiken.test.service.NoteService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/notes")
 public class NoteController {
@@ -19,10 +20,17 @@ public class NoteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Note>> getAllNotes() {
-        List<Note> notes = noteService.getAllNotes();
-        return ResponseEntity.ok(notes);
+    public ResponseEntity<List<Note>> getAllNotes(@RequestParam boolean sort) {
+        if (sort){
+            List<Note> notes = noteService.getAllnotesSorted();
+            return ResponseEntity.ok(notes);
+        }
+        else{
+            List<Note> notes = noteService.getAllNotes();
+            return ResponseEntity.ok(notes);
+        }
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Note> getNoteById(@PathVariable Long id) {

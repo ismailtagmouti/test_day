@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Book } from 'lucide-react';
+import { Book} from 'lucide-react';
 import * as api from './api';
 import { NotebookList } from './components/NotebookList';
 import { NoteList } from './components/NoteList';
@@ -34,6 +34,10 @@ function App() {
     setNotes(loadedNotes);
   };
 
+  const handleSortNote = async (notebookId) =>{
+    const loadNotes = await api.getNotesSorted(notebookId);
+    setNotes(loadedNotes);
+  }
   const handleAddNotebook = async (e) => {
     e.preventDefault();
     if (!newNotebookName.trim()) return;
@@ -43,7 +47,7 @@ function App() {
   };
 
   const handleDeleteNotebook = async (id) => {
-    api.deleteNotebook(id);
+    await api.deleteNotebook(id);
     loadNotebooks();
     if (selectedNotebook?.id === id) {
       setSelectedNotebook(null);
@@ -125,6 +129,7 @@ function App() {
             noteTitle={noteTitle}
             noteContent={noteContent}
             onAddNote={handleAddNote}
+            onSortNote={handleSortNote}
             onEditNote={handleEditNote}
             onDeleteNote={handleDeleteNote}
             onNoteContentChange={handleNoteContentChange}

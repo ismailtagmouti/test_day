@@ -2,6 +2,7 @@ package com.keiken.test.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Sort;
 
 import com.keiken.test.model.Note;
 import com.keiken.test.model.Notebook;
@@ -10,6 +11,7 @@ import com.keiken.test.repository.NotebookRepository;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 @Transactional
@@ -27,6 +29,10 @@ public class NoteService {
         return noteRepository.findAll();
     }
 
+    public List<Note> getAllnotesSorted(){
+        return noteRepository.findAll(Sort.by(Sort.Direction.DESC, "title"));
+    }
+
     public Optional<Note> getNoteById(Long id) {
         return noteRepository.findById(id);
     }
@@ -37,6 +43,8 @@ public class NoteService {
 
         return notes;
     }
+
+    
 
     public Note createNote(Long notebookId, Note note) {
         Notebook notebook = notebookRepository.findById(notebookId)
